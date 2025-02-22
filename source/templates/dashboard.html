@@ -1,0 +1,23 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+    <h1 class="text-3xl font-bold mb-8">Welcome to Your Dashboard</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Plan New Trip</h2>
+            <p class="mb-4">Upload your travel itinerary and get personalized recommendations</p>
+            <a href="{{ url_for('chatbot') }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                Start Planning
+            </a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">View History</h2>
+            <p class="mb-4">Access your previous trip plans and conversations</p>
+            <a href="{{ url_for('history') }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                View History
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

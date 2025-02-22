@@ -1,0 +1,17 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+    <h1 class="text-4xl font-bold mb-8">Welcome to Travel Planner</h1>
+    <p class="text-xl mb-8">Plan your perfect trip with our AI-powered travel assistant</p>
+    {% if 'user_id' in session %}
+        <a href="{{ url_for('chatbot') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+            Plan My Trip
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+            Get Started
+        </a>
+    {% endif %}
+</div>
+{% endblock %}
