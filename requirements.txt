@@ -1,0 +1,4 @@
+google-generativeai # or the latest version
+google-auth
+google-api-core
+requests
