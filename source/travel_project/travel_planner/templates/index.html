@@ -1,0 +1,178 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage Vault - Venture out, find yourself</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #e8e1d7;
+        }
+
+        .top-bar {
+            background-color: #8b8178;
+            padding: 10px 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .contact-email {
+            margin-left: 20px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 20px 50px;
+            background-color: #e8d5c4;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+
+        .logo p {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .hero {
+            height: calc(100vh - 180px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .enquire-btn {
+            background-color: #e8d5c4;
+            color: #000;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .enquire-btn:hover {
+            background-color: #d4c1b0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h2 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <span class="contact-email">mail@voyagevault.in</span>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <h1>VoyageVault</h1>
+                <p>Venture out, find yourself</p>
+            </a>
+            <div class="nav-links">
+                <a href="/">HOME</a>
+                <a href="/about">ABOUT US</a>
+                <a href="/contact">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <h2>Venture out, find yourself."</h2>
+        <p>Unlock the world with Voyage Vault – your personal key to discovering hidden gems, unforgettable adventures, and curated itineraries.</p>
+        <a href="/login" name="login" class="enquire-btn">ENQUIRE NOW</a>
+    </main>
+
+    <!-- Add Font Awesome for social icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage Vault - Travel Categories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #e8e1d7;
+        }
+
+        .top-bar {
+            background-color: #8b8178;
+            padding: 10px 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .contact-email {
+            margin-left: 20px;
+            color: #000;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 20px 50px;
+            background-color: #e8d5c4;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+
+        .logo p {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .main-content {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category {
+            text-align: center;
+            width: 300px;
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 50% / 40%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover .category-image img {
+            transform: scale(1.1);
+        }
+
+        .category h3 {
+            font-size: 24px;
+            font-weight: normal;
+            color: #000;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .category {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <span class="contact-email">mail@voyagevault.in</span>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <h1>VoyageVault</h1>
+                <p>Venture out, find yourself</p>
+            </a>
+            <div class="nav-links">
+                <a href="/">HOME</a>
+                <a href="/contact">CONTACT</a>
+                <a href="/logout">LOG OUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="section-title">
+            <h2>TRAVEL</h2>
+            <p>the world</p>
+        </div>
+
+        <div class="categories">
+            <div class="category">
+                <div class="category-image">
+                    <img src="https://plus.unsplash.com/premium_photo-1697730370661-51bf72769ff6?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2hhanVyYWhvfGVufDB8fDB8fHww" alt="Religious travel destination showing a golden temple" />
+                </div>
+                <a href="/religious" class="Religious"> <h3>Religious</h3> </a>
+            </div>
+
+            <div class="category">
+                <div class="category-image">
+                    <img src="https://etimg.etb2bimg.com/photo/87976292.cms" alt="Leisure travel showing a person relaxing on a beach" />
+                </div>
+                <a href="/leisure" class="leisure"> <h3>leisure</h3> </a>
+            </div>
+
+            <div class="category">
+                <div class="category-image">
+                    <img src="https://media.timeout.com/images/102499685/750/562/image.jpg" alt="Adventure travel showing a person skydiving" />
+                </div>
+                <a href="/adventure" class="adventure"> <h3>adventure</h3> </a>
+            </div>
+        </div>
+
+        <a href="/" class="back-button">
+            <span>←</span>
+        </a>
+    </main>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoyageVault - Venture out, find yourself</title>
+    <style>
+        /* Previous styles remain the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* ... (previous styles remain unchanged until the arrow styles) ... */
+        /* Adding back arrow styles */
+        .back-arrow {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: #b8a99a;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-arrow:hover {
+            color: #8b7b6a;
+            transform: translateX(-5px);
+        }
+
+        .back-arrow span {
+            font-size: 1.2rem;
+        }
+
+        /* Rest of your existing styles... */
+        body {
+            background-color: #f4ece1;
+        }
+
+        .header {
+            background-color: #d6ccc2;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            background-color: #f4ece1;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .search-bar {
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .search-bar::after {
+            content: '🔍';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #d6ccc2;
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #b8a99a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .booking-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            background-color: #e8e0d5;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #b8a99a;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            align-self: flex-end;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn:hover {
+            background-color: #a39485;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .destination-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                margin-top: 2rem;
+            }
+
+            .back-arrow {
+                bottom: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="social-links">
+            <span>f</span>
+            <span>○</span>
+            <span>mail@voyagevault.in</span>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div>
+            <h1 class="logo">VoyageVault</h1>
+            <p class="tagline">Venture out, find yourself</p>
+        </div>
+        <div class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">CONTACT</a>
+            <a href="#">LOG OUT</a>
+        </div>
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search your destination...">
+    </div>
+
+    <main class="main-content">
+        <form action="/itinerary_1" class="booking-form">
+            <div class="form-group">
+                <label>No of people :</label>
+                <input type="number" min="1">
+            </div>
+            
+            <div class="form-group">
+                <label>Start Date:</label>
+                <input type="text" placeholder="DD/MM/YY">
+            </div>
+
+            <div class="form-group">
+                <label>End Date :</label>
+                <input type="text" placeholder="DD/MM/YY">
+            </div>
+
+            <button type="submit" class="submit-btn">Continue to Book →</button>
+        </form>
+
+        <div class="destination-image">
+            <img src="https://beonthetrail.com/storage/blogs/5/0C1lRwEGGcEnY2R47O2hPOPlZTpmOjKtNGkW8817.jpg" alt="Temple destination">
+        </div>
+    </main>
+
+    <a href="/categories" class="back-arrow">
+        ←<span>Back</span>
+    </a>
+</body>
+</html>
