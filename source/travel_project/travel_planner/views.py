@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import google.generativeai as genai
+from .models import Religious  # Import the Religious model
 
 # Configure Google Gemini AI
 GOOGLE_API_KEY = "AIzaSyB9hq8iaipp08G6vCtdYz_WQ4C_cgiLyXA"
@@ -15,7 +16,12 @@ def index(request):
     return render(request, 'index.html')
 
 def login(request):
-    return render(request, 'login.html') 
+    # Fetch all the religious sites from the database
+    sites = Religious.objects.all()
+    
+    # Pass the data to the 'login.html' template using context dictionary
+    return render(request, 'login.html', {'sites': sites})
+
 
 def categories(request):
     return render(request, 'categories.html') 
