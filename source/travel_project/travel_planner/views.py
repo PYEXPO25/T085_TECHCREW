@@ -1,14 +1,18 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from datetime import timedelta
-from .models import Destination, Activity, Itinerary, ItineraryActivity
-from .forms import ItineraryPreferencesForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import google.generativeai as genai
+
+# Configure Google Gemini AI
+GOOGLE_API_KEY = "AIzaSyB9hq8iaipp08G6vCtdYz_WQ4C_cgiLyXA"
+genai.configure(api_key=GOOGLE_API_KEY)
+
+# Initialize the model
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 def index(request):
     return render(request, 'index.html')
-
-from django.shortcuts import render
 
 def login(request):
     return render(request, 'login.html') 
@@ -22,6 +26,27 @@ def religious(request):
 def itinerary_1(request):
     return render(request, 'itinerary_1.html')
 
+def home(request):
+    return render(request, 'home.html')
+
+@csrf_exempt  # Disable CSRF for testing; secure in production
+def chat_with_ai(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user_input = data.get("message", "")
+
+            if not user_input:
+                return JsonResponse({"error": "No message provided"}, status=400)
+
+            # Get AI response
+            response = model.generate_content(user_input)
+
+            return JsonResponse({"response": response.text})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
 # @login_required
 # def generate_itinerary(request):
