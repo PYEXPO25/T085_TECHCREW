@@ -2,13 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voyage Vault - Venture out, Get your trip planned </title>
+    <title>Voyage Vault - Your Ultimate Travel Itinerary Planner</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Playfair Display', 'Times New Roman', Times, serif;
         }
 
         body {
@@ -19,6 +19,7 @@
             background-color: #8b8178;
             padding: 10px 50px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -32,17 +33,42 @@
             color: #000;
             text-decoration: none;
             font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
         }
 
         .contact-email {
             margin-left: 20px;
-            color: #000;
+            color: #fff;
             font-size: 16px;
+        }
+
+        .login-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .login-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .login-links a:hover {
+            color: #e8d5c4;
         }
 
         .navbar {
             padding: 20px 50px;
             background-color: #e8d5c4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-container {
@@ -77,16 +103,54 @@
             text-decoration: none;
             color: #000;
             font-size: 18px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .hero {
-            height: calc(100vh - 180px);
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            background-image: url('/api/placeholder/1200/800');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #fff;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
         }
 
         .hero h2 {
@@ -102,22 +166,469 @@
             margin-bottom: 40px;
         }
 
+        .search-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
         .enquire-btn {
-            background-color: #e8d5c4;
-            color: #000;
+            background-color: #8b8178;
+            color: #fff;
             padding: 15px 40px;
             text-decoration: none;
             font-size: 18px;
             transition: background-color 0.3s;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .enquire-btn:hover {
-            background-color: #d4c1b0;
+            background-color: #6a635c;
+        }
+
+        .features {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h3 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #8b8178;
+        }
+
+        .feature-card h4 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .popular-destinations {
+            padding: 60px 20px;
+            background-color: #f5f1ea;
+        }
+
+        .popular-destinations h3 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            position: relative;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: #fff;
+        }
+
+        .destination-info h4 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .destination-info p {
+            font-size: 16px;
+        }
+
+        .testimonials {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials h3 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+
+        .testimonial-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 300px;
+            flex: 1;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+        }
+
+        .newsletter {
+            padding: 60px 20px;
+            background-color: #e8d5c4;
+            text-align: center;
+        }
+
+        .newsletter h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .newsletter-btn {
+            padding: 12px 20px;
+            background-color: #8b8178;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #e8d5c4;
+        }
+
+        .footer-social a {
+            color: #fff;
+            font-size: 20px;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            z-index: 1000;
+            transition: height 0.3s;
+        }
+
+        .chat-header {
+            background-color: #8b8178;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .chat-toggle {
+            font-size: 20px;
+        }
+
+        #chat-box {
+            height: 250px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+        }
+
+        .user-message .message-content {
+            background-color: #e8d5c4;
+        }
+
+        .ai-message .message-content {
+            background-color: #efefef;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .send-btn {
+            background-color: #8b8178;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Trip Planner Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .close-modal {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .planner-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .budget-slider {
+            width: 100%;
+        }
+
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .interest-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .datepicker {
+            width: 100%;
         }
 
         @media (max-width: 768px) {
+            .top-bar {
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
             .nav-container {
                 flex-direction: column;
                 text-align: center;
@@ -126,39 +637,175 @@
             .nav-links {
                 margin-top: 20px;
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
+            }
+
+            .hero {
+                height: auto;
+                padding: 60px 20px;
             }
 
             .hero h2 {
-                font-size: 36px;
+                font-size: 32px;
             }
 
             .hero p {
-                font-size: 18px;
+                font-size: 16px;
+            }
+
+            .search-container {
+                width: 95%;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .feature-card, .destination-card, .testimonial-card {
+                min-width: 100%;
+            }
+
+            .chat-container {
+                width: 300px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 10px;
             }
         }
-        #chat-box {
-    height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    background: #f9f9f9;
-}
 
-input[type="text"] {
-    width: 70%;
-    padding: 8px;
-    margin-right: 5px;
-}
+        /* Calendar styles */
+        .datepicker-calendar {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
 
-button {
-    padding: 8px;
-    background: #2d2d2d;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .calendar-day:hover {
+            background-color: #f0f0f0;
+        }
+
+        .calendar-day.selected {
+            background-color: #8b8178;
+            color: white;
+        }
+        
+        /* Itinerary Templates Section */
+        .templates {
+            padding: 60px 20px;
+            background-color: #f5f1ea;
+        }
+        
+        .templates h3 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .template-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .template-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .template-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .template-card:hover .template-img img {
+            transform: scale(1.1);
+        }
+        
+        .template-content {
+            padding: 20px;
+        }
+        
+        .template-content h4 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .template-content p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .template-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #8b8178;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .use-template-btn {
+            display: inline-block;
+            background-color: #8b8178;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .use-template-btn:hover {
+            background-color: #6a635c;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +817,14 @@ button {
             <a href="#" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
+            <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
             <span class="contact-email">mail@voyagevault.in</span>
+        </div>
+        <div class="login-links">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
         </div>
     </div>
 
@@ -182,68 +836,187 @@ button {
             </a>
             <div class="nav-links">
                 <a href="/">HOME</a>
+                <a href="/destinations">DESTINATIONS</a>
+                <a href="/itineraries">ITINERARIES</a>
                 <a href="/about">ABOUT US</a>
                 <a href="/contact">CONTACT</a>
-            
             </div>
         </div>
     </nav>
 
-    <main class="hero">
-        <h2>Venture out,Get your trip planned</h2>
-        <p>Unlock the world with Voyage Vault – your personal key to discovering hidden gems, unforgettable adventures, and curated itineraries.</p>
-        <a href="/login" name="login" class="enquire-btn">ENQUIRE NOW</a>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Plan Your Perfect Journey</h2>
+                <p>Unlock the world with Voyage Vault – your personal key to discovering hidden gems, unforgettable adventures, and curated itineraries.</p>
+            </div>
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" class="search-input" placeholder="Where do you want to go?">
+                    <input type="text" class="search-input datepicker" placeholder="Start Date" onclick="toggleCalendar(this)">
+                    <input type="text" class="search-input datepicker" placeholder="End Date" onclick="toggleCalendar(this)">
+                    <select class="search-input">
+                        <option value="">Travelers</option>
+                        <option value="1">1 Traveler</option>
+                        <option value="2">2 Travelers</option>
+                        <option value="3">3 Travelers</option>
+                        <option value="4+">4+ Travelers</option>
+                    </select>
+                    <button type="button" class="enquire-btn" onclick="openPlannerModal()">PLAN MY TRIP</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>Why Choose VoyageVault</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4>Custom Itineraries</h4>
+                    <p>Personalized travel plans tailored to your preferences, budget, and schedule.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h4>Hidden Gems</h4>
+                    <p>Discover off-the-beaten-path destinations and authentic local experiences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h4>Budget Friendly</h4>
+                    <p>Options for every budget with transparent pricing and value recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h4>24/7 Support</h4>
+                    <p>Expert assistance throughout your journey for peace of mind while traveling.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="templates">
+            <h3>Popular Itinerary Templates</h3>
+            <div class="templates-grid">
+                <div class="template-card">
+                    <div class="template-img">
+                        <img src="/api/placeholder/400/200" alt="Bali Beach Getaway">
+                    </div>
+                    <div class="template-content">
+                        <h4>Bali Beach Getaway</h4>
+                        <div class="template-meta">
+                            <span><i class="far fa-clock"></i> 7 Days</span>
+                            <span><i class="far fa-star"></i> 4.9 (253 reviews)</span>
+                        </div>
+                        <p>Explore the beautiful beaches, rice terraces, and temples of Bali with this perfectly balanced 7-day itinerary.</p>
+                        <a href="#" class="use-template-btn">Use This Template</a>
+                    </div>
+                </div>
+                <div class="template-card">
+                    <div class="template-img">
+                        <img src="/api/placeholder/400/200" alt="European Capitals">
+                    </div>
+                    <div class="template-content">
+                        <h4>European Capitals Tour</h4>
+                        <div class="template-meta">
+                            <span><i class="far fa-clock"></i> 14 Days</span>
+                            <span><i class="far fa-star"></i> 4.8 (187 reviews)</span>
+                        </div>
+                        <p>The perfect two-week journey through Paris, Amsterdam, Berlin, Prague and Vienna.</p>
+                        <a href="#" class="use-template-btn">Use This Template</a>
+                    </div>
+                </div>
+                <div class="template-card">
+                    <div class="template-img">
+                        <img src="/api/placeholder/400/200" alt="Japan Highlights">
+                    </div>
+                    <div class="template-content">
+                        <h4>Japan Highlights</h4>
+                        <div class="template-meta">
+                            <span><i class="far fa-clock"></i> 10 Days</span>
+                            <span><i class="far fa-star"></i> 4.9 (312 reviews)</span>
+                        </div>
+                        <p>Experience the perfect balance of tradition and modernity with this comprehensive Japan itinerary.</p>
+                        <a href="#" class="use-template-btn">Use This Template</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-destinations">
+            <h3>Popular Destinations</h3>
+            <div class="destination-grid">
+                <div class="destination-card">
+                    <img src="/api/placeholder/400/300" alt="Paris">
+                    <div class="destination-info">
+                        <h4>Paris, France</h4>
+                        <p>The City of Light</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/400/300" alt="Bali">
+                    <div class="destination-info">
+                        <h4>Bali, Indonesia</h4>
+                        <p>Island of the Gods</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/400/300" alt="Tokyo">
+                    <div class="destination-info">
+                        <h4>Tokyo, Japan</h4>
+                        <p>Where Tradition Meets Future</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/400/300" alt="Santorini">
+                    <div class="destination-info">
+                        <h4>Santorini, Greece</h4>
+                        <p>Stunning Aegean Views</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h3>What Our Travelers Say</h3>
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"VoyageVault planned our honeymoon to Italy and it was absolute perfection. Every detail was taken care of, and we discovered so many hidden gems we would have never found on our own."</p>
+                    <p class="testimonial-author">- Sarah & Michael</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a solo traveler, safety and authentic experiences are my priority. The team at VoyageVault created an itinerary that allowed me to immerse myself in local culture while feeling secure throughout my journey."</p>
+                    <p class="testimonial-author">- James T.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Our family trip to Japan was flawless thanks to VoyageVault. The custom itinerary catered to both our teenagers and us parents. The digital travel guide was a lifesaver!"</p>
+                    <p class="testimonial-author">- The Rodriguez Family</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <h3>Stay Updated with Travel Inspiration</h3>
+            <p>Join our newsletter to receive personalized travel ideas, seasonal promotions, and expert tips for your next adventure.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </section>
     </main>
 
-    <!-- Add Font Awesome for social icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-</body>
-<div class="chat-container">
-    <h3>Chat with AI</h3>
-    <div id="chat-box">
-        <p><strong>AI:</strong> Hello! How can I assist you?</p>
-    </div>
-    <input type="text" id="user-input" placeholder="Type your message..." />
-    <button onclick="sendMessage()">Send</button>
-</div>
-
-<!-- Add Font Awesome for social icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-<script>
-    function sendMessage() {
-        let userInput = document.getElementById("user-input").value;
-        let chatBox = document.getElementById("chat-box");
-
-        if (userInput.trim() === "") return;
-
-        // Display user message
-        chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-
-        // Send request to Django backend
-        fetch("/chat/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: userInput }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.response) {
-                chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
-            } else {
-                chatBox.innerHTML += `<p><strong>AI:</strong> Error fetching response</p>`;
-            }
-
-            // Scroll to latest message
-            chatBox.scrollTop = chatBox.scrollHeight;
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            chatBox.innerHTML += `<p><strong>AI:</strong> An error occurred</p>`;
-        });
-
-        document.getElementById("user-input").value = ""; // Clear input field
-    }
-</script>
-</html>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>VoyageVault</h4>
+                <p>Your trusted travel planning partner since 2020.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter">

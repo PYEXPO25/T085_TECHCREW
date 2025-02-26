@@ -11,5 +11,8 @@ urlpatterns = [
     path('itinerary_1', views.itinerary_1, name='itinerary_1'),
     path('chat/', chat_with_ai, name='chat_with_ai'),  
     path('home', views.home, name='home'),
+    path('about', views.about, name='about'),
+    path('leisure', views.leisure, name='leisure'),
+    path('adventure', views.adventure, name='adventure'),
 ]
 
