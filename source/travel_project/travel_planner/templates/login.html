@@ -289,6 +289,14 @@ button {
         </div>
     </div>
 
+    {% for site in sites %}
+    <li>
+        <strong>{{ site.city }}</strong>: {{ site.site }}<br>
+        <p><em>Description:</em> {{ site.description }}</p>
+        <p><em>History:</em> {{ site.history }}</p>
+    </li>
+    {% endfor %}
+
     <!-- Font Awesome for icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 
