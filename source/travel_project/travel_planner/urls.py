@@ -11,5 +11,6 @@ urlpatterns = [
     path('itinerary_1', views.itinerary_1, name='itinerary_1'),
     path('chat/', chat_with_ai, name='chat_with_ai'),  
     path('home', views.home, name='home'),
+    path('search-cities/', views.search_cities, name='search_cities'),
 ]
 

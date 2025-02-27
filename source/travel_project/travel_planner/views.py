@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import google.generativeai as genai
 from .models import Religious  # Import the Religious model
+import requests  # For sending data to Gemini AI
 
 # Configure Google Gemini AI
 GOOGLE_API_KEY = "AIzaSyB9hq8iaipp08G6vCtdYz_WQ4C_cgiLyXA"
@@ -35,6 +36,72 @@ def itinerary_1(request):
 def home(request):
     return render(request, 'home.html')
 
+def search_cities(request):
+    query = request.GET.get('q', '')
+
+    if query:
+        # Filter based on the 'city' field (instead of 'name')
+        # Include both 'city' and 'site' fields in the response
+        cities = Religious.objects.filter(city__icontains=query).values('city', 'site')
+
+        # Return the matching cities and their associated sites as JSON
+        return JsonResponse({'cities': list(cities)})
+    else:
+        return JsonResponse({'cities': []})
+
+
+
+# Itinerary view
+def itinerary_1(request):
+    # Extract query parameters (passed from the form)
+    destination = request.GET.get('destination', '')
+    num_people = request.GET.get('numPeople', '')
+    start_date = request.GET.get('startDate', '')
+    end_date = request.GET.get('endDate', '')
+
+    # If the destination contains parentheses (i.e., city and site)
+    if '(' in destination and ')' in destination:
+        # Split the city and site parts
+        city, site_name = destination.split('(')
+        site_name = site_name.rstrip(')')  # Remove the closing parenthesis
+        city = city.strip()  # Remove any extra spaces
+    else:
+        city = destination
+        site_name = None  # No site name in the query parameter
+
+    # Do the database lookup for the city
+    site = Religious.objects.filter(city__iexact=city, site__iexact=site_name).first()
+
+    # Prepare context data
+    context = {
+        'destination': destination,
+        'num_people': num_people,
+        'start_date': start_date,
+        'end_date': end_date,
+        'city': city,
+        'site_name': site_name,
+    }
+
+    # If the site was found, pass its details to the template
+    if site:
+        context.update({
+            'site': site.site,
+            'sites': site,  # Pass the whole site object to the template
+            'description': site.description,  # Fetch description from DB
+            'history': site.history,  # Fetch history from DB
+        })
+    else:
+        context.update({
+            'site': 'Unknown',
+            'sites': None,
+            'description': 'Description not available.',
+            'history': 'History not available.',
+        })
+
+    # Render the 'itinerary_1.html' template and pass the context
+    return render(request, 'itinerary_1.html', context)
+
+# AI interaction endpoint
 @csrf_exempt  # Disable CSRF for testing; secure in production
 def chat_with_ai(request):
     if request.method == "POST":
@@ -45,7 +112,7 @@ def chat_with_ai(request):
             if not user_input:
                 return JsonResponse({"error": "No message provided"}, status=400)
 
-            # Get AI response
+            # Get AI response based on the user input
             response = model.generate_content(user_input)
 
             return JsonResponse({"response": response.text})
@@ -53,7 +120,6 @@ def chat_with_ai(request):
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
-
 # @login_required
 # def generate_itinerary(request):
 #     if request.method == 'POST':
