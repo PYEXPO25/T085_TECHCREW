@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoyageVault - Your Ultimate Travel Itinerary Planner</title>
+    <!-- Add Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #f5f0e6;
+            color: #333;
+        }
+
+        /* Header Section */
+        .top-bar {
+            background-color: #bfb5a3;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #333;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #666;
+        }
+
+        .contact-email {
+            font-size: 18px;
+        }
+
+        /* Navigation */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .logo h1 {
+            font-size: 40px;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid #333;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 30px 50px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .category-item, .feature-item, .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .emoji {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        .closing {
+            font-style: italic;
+            font-size: 20px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .arrow {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+        /* Back Arrow Styling */
+        .back-arrow {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .back-arrow a {
+            font-size: 30px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .back-arrow a:hover {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar with Social Media and Contact -->
+    <div class="top-bar">
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="contact-email">mail@voyagevault.in</div>
+    </div>
+
+    <!-- Main Header with Logo and Navigation -->
+    <header class="main-header">
+        <div class="logo">
+            <h1>VoyageVault</h1>
+            <p>Venture out, find yourself</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Who We Are Section -->
+        <section class="section">
+            <h2>Who We Are?!</h2>
+            <p>Welcome to VoyageVault, your ultimate travel itinerary planner! We curate personalized trips based on your interests, budget, and preferences—whether it's a spiritual retreat, a relaxing getaway, or an adventure-packed journey.</p>
+        </section>
+
+        <!-- Travel Categories Section -->
+        <section class="section">
+            <h2>Our Travel Categories:</h2>
+            <div class="category-item">
+                <span class="emoji">🌍</span>
+                <span><strong>Religious Journeys</strong> – Visit sacred sites and pilgrimage routes.</span>
+            </div>
+            <div class="category-item">
+                <span class="emoji">🌴</span>
+                <span><strong>Leisure Escapes</strong> – Relax at beaches, resorts, and scenic spots.</span>
+            </div>
+            <div class="category-item">
+                <span class="emoji">⛰️</span>
+                <span><strong>Adventure Expeditions</strong> – Enjoy thrilling activities like hiking, trekking, and scuba diving.</span>
+            </div>
+        </section>
+
+        <!-- What We Offer Section -->
+        <section class="section">
+            <h2>What We Offer</h2>
+            <div class="feature-item">
+                <span class="emoji">✅</span>
+                <span><strong>Budget Planning</strong> – Cost-effective accommodation & transport.</span>
+            </div>
+            <div class="feature-item">
+                <span class="emoji">💬</span>
+                <span><strong>AI Chatbot</strong> – 24/7 travel assistance.</span>
+            </div>
+            <div class="feature-item">
+                <span class="emoji">📍</span>
+                <span><strong>Time & Location Planning</strong> – Optimized itineraries & real-time tracking.</span>
+            </div>
+            <div class="feature-item">
+                <span class="emoji">🌤️</span>
+                <span><strong>Weather Forecasting</strong> – Stay prepared.</span>
+            </div>
+            <div class="feature-item">
+                <span class="emoji">⭐</span>
+                <span><strong>Personalized Suggestions</strong> – Discover hidden gems & cultural spots.</span>
+            </div>
+            <div class="feature-item">
+                <span class="emoji">📊</span>
+                <span><strong>User Dashboard</strong> – Save trips, track journeys & share experiences.</span>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="section">
+            <h2>Why Choose Us?</h2>
+            <div class="benefit-item">
+                <span class="emoji">✨</span>
+                <span><strong>Personalized travel plans</strong></span>
+            </div>
+            <div class="benefit-item">
+                <span class="emoji">👨‍💼</span>
+                <span><strong>Expert recommendations</strong></span>
+            </div>
+            <div class="benefit-item">
+                <span class="emoji">🌐</span>
+                <span><strong>User-friendly dashboard</strong></span>
+            </div>
+            <div class="benefit-item">
+                <span class="emoji">🌍</span>
+                <span><strong>Explore hidden gems</strong></span>
+            </div>
+        </section>
+
+        <!-- Closing Statement -->
+        <div class="closing">
+            Let's make your dream trip a reality! 🌎✨
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>

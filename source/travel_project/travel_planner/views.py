@@ -120,6 +120,16 @@ def chat_with_ai(request):
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
+def about(request):
+    return render(request, 'about.html')
+
+def adventure(request):
+    return render(request, 'adventure.html')
+
+def leisure(request):
+    return render(request, 'leisure.html')
 # @login_required
 # def generate_itinerary(request):
 #     if request.method == 'POST':

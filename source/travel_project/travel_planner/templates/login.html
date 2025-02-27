@@ -354,9 +354,10 @@ button {
             errorMessage.textContent = ""; // Clear previous errors
 
             // Mock validation logic
-            if (email === "user@example.com" && password === "password123") {
+            if (email === "dhanya@gmail.com" && password === "password123") {
                 alert("Login successful!");
                 closeLoginModal();
+                window.location.href = "/categories";
             } else {
                 errorMessage.textContent = "Invalid email or password.";
             }

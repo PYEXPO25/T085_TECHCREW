@@ -1,8 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoyageVault - Venture out, Get your trip planned</title>
+    <!-- Add Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base styles */
         * {
@@ -30,12 +33,24 @@
             color: #333;
             text-decoration: none;
             font-size: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #000;
         }
         
         .contact-email {
             margin-left: 20px;
             color: #000;
             font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-email:hover {
+            color: #333;
         }
         
         /* Logo Section */
@@ -74,10 +89,15 @@
             font-size: 18px;
             text-transform: uppercase;
             padding: 5px 10px;
+            transition: border-bottom 0.3s ease;
         }
         
         .navigation a.active {
             border-bottom: 2px solid #333;
+        }
+        
+        .navigation a:hover:not(.active) {
+            border-bottom: 2px solid #8b8178;
         }
         
         /* Image Carousel */
@@ -229,8 +249,8 @@
     <!-- Header with social icons and email -->
     <div class="header">
         <div class="social-icons">
-            <a href="#"><i class="fa fa-facebook">f</i></a>
-            <a href="#"><i class="fa fa-instagram">ⓘ</i></a>
+            <a href="https://facebook.com/voyagevault" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/_tech_crew?igsh=cXYxZXRrbXpqcHN3&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <a href="mailto:mail@voyagevault.in" class="contact-email">mail@voyagevault.in</a>
     </div>
@@ -243,7 +263,9 @@
         </div>
         
         <div class="navigation">
-            <a href="#" class="active">HOME</a>
+            <a href="home.html" class="active">HOME</a>
+            <a href="about.html">ABOUT US</a>
+            <a href="#">CONTACT</a>
         </div>
     </div>
     
