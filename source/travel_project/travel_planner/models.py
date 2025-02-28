@@ -1,21 +1,18 @@
 from django.db import models
 
 class Religious(models.Model):
-    city = models.CharField(max_length=100)
-    sites = models.CharField(max_length=200)
-    description = models.TextField()
-    history = models.TextField()
-
-    def __str__(self):
-        return self.city
+    # Column for city name
+    city = models.CharField(max_length=255)
     
-from django.db import models
-
-class Leisure(models.Model):
-    city = models.CharField(max_length=100)
-    sites = models.CharField(max_length=200)
+    # Column for site name
+    site = models.CharField(max_length=255)
+    
+    # Column for a description of the site
     description = models.TextField()
-    popularity = models.TextField()
-
+    
+    # Column for the historical information
+    history = models.TextField()
+    
+    # A string representation of the model (for admin display and debugging)
     def __str__(self):
-        return self.city
+        return f"{self.city} - {self.site}"
