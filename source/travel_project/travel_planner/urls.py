@@ -13,7 +13,7 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('search-cities/', views.search_cities, name='search_cities'),
     path('about',views.about, name='about'),
-    path('adventure',views.adventure, name='adventure'),
     path('leisure',views.leisure, name='leisure'),
+    path('adventure', views.adventure, name='adventure')
 ]
 

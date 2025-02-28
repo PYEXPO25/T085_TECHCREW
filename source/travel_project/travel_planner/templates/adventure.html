@@ -1,298 +1,268 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoyageVault - Venture out, Get your trip planned</title>
-    <!-- Add Font Awesome for social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base styles */
+        /* Previous styles remain the same */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Times New Roman', serif;
         }
-        
+
+        /* ... (previous styles remain unchanged until the arrow styles) ... */
+        /* Adding back arrow styles */
+        .back-arrow {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: #b8a99a;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-arrow:hover {
+            color: #8b7b6a;
+            transform: translateX(-5px);
+        }
+
+        .back-arrow span {
+            font-size: 1.2rem;
+        }
+
+        /* Rest of your existing styles... */
         body {
-            background-color: #e8e1d7;
+            background-color: #f4ece1;
         }
-        
-        /* Header Section */
+
         .header {
-            background-color: #8b8178;
-            padding: 15px 30px;
+            background-color: #d6ccc2;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .social-icons a {
-            margin-right: 15px;
+
+        .social-links {
             color: #333;
-            text-decoration: none;
-            font-size: 20px;
-            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
         }
-        
-        .social-icons a:hover {
-            transform: scale(1.2);
-            color: #000;
-        }
-        
-        .contact-email {
-            margin-left: 20px;
-            color: #000;
-            font-size: 16px;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .contact-email:hover {
-            color: #333;
-        }
-        
-        /* Logo Section */
-        .logo-section {
-            padding: 20px 30px;
-            background-color: #e8e0d0;
+
+        .nav {
+            background-color: #f4ece1;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
+            font-size: 2rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .search-bar {
+            margin: 2rem auto;
+            max-width: 600px;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .search-bar::after {
+            content: '🔍';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #d6ccc2;
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #b8a99a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .booking-form {
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
-        
-        .logo h1 {
-            font-size: 32px;
-            font-weight: normal;
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-        
-        .logo p {
-            font-size: 14px;
-            margin-top: 5px;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
-        
-        /* Navigation */
-        .navigation {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .navigation a {
-            text-decoration: none;
-            color: #333;
-            font-size: 18px;
-            text-transform: uppercase;
-            padding: 5px 10px;
-            transition: border-bottom 0.3s ease;
-        }
-        
-        .navigation a.active {
-            border-bottom: 2px solid #333;
-        }
-        
-        .navigation a:hover:not(.active) {
-            border-bottom: 2px solid #8b8178;
-        }
-        
-        /* Image Carousel */
-        .carousel-container {
-            padding: 20px 30px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .carousel {
-            display: flex;
+
+        .form-group input {
             width: 100%;
-            gap: 0;
-            justify-content: center;
+            padding: 0.8rem;
+            border: none;
+            background-color: #e8e0d5;
+            border-radius: 5px;
         }
-        
-        .carousel-item {
-            min-width: 200px;
-            height: 180px;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            opacity: 0.5; /* All images start with lighter opacity */
-            transform: scale(0.85);
-            transition: all 0.5s ease;
-        }
-        
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Complete bounce animation with forward and backward motion */
-        @keyframes completeBounce {
-            0%, 100% { 
-                opacity: 0.5; 
-                transform: scale(0.85); 
-                z-index: 1;
-            }
-            10%, 15% { 
-                opacity: 1; 
-                transform: scale(1.1); 
-                z-index: 10;
-            }
-            20% {
-                opacity: 0.5;
-                transform: scale(0.85);
-                z-index: 1;
-            }
-        }
-        
-        /* Apply different animation delays to each item */
-        .carousel-item:nth-child(1) {
-            animation: completeBounce 10s infinite;
-            animation-delay: 0s;
-        }
-        
-        .carousel-item:nth-child(2) {
-            animation: completeBounce 10s infinite;
-            animation-delay: 2s;
-        }
-        
-        .carousel-item:nth-child(3) {
-            animation: completeBounce 10s infinite;
-            animation-delay: 4s;
-        }
-        
-        .carousel-item:nth-child(4) {
-            animation: completeBounce 10s infinite;
-            animation-delay: 6s;
-        }
-        
-        .carousel-item:nth-child(5) {
-            animation: completeBounce 10s infinite;
-            animation-delay: 8s;
-        }
-        
-        /* Quote Section */
-        .quote-section {
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #d2c8b5;
-            text-align: center;
-            max-width: 90%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .quote-section::before {
-            content: '"';
-            font-size: 80px;
-            color: rgba(0,0,0,0.1);
-            position: absolute;
-            top: 10px;
-            left: 20px;
-        }
-        
-        .quote-section::after {
-            content: '"';
-            font-size: 80px;
-            color: rgba(0,0,0,0.1);
-            position: absolute;
-            bottom: -30px;
-            right: 20px;
-        }
-        
-        .quote {
-            font-size: 26px;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            text-transform: uppercase;
-            font-style: italic;
-            line-height: 1.5;
-            letter-spacing: 1px;
-        }
-        
-        /* Back Button Style */
-        .back-button {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background-color: #d2c8b5;
-            color: #333;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            font-size: 24px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 1000;
+
+        .submit-btn {
+            background-color: #b8a99a;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 1rem;
+            align-self: flex-end;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
-        .back-button:hover {
-            background-color: #c5b9a5;
-            transform: scale(1.05);
+
+        .submit-btn:hover {
+            background-color: #a39485;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .destination-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                margin-top: 2rem;
+            }
+
+            .back-arrow {
+                bottom: 1rem;
+                left: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header with social icons and email -->
-    <div class="header">
-        <div class="social-icons">
-            <a href="https://facebook.com/voyagevault" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/_tech_crew?igsh=cXYxZXRrbXpqcHN3&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+    <header class="header">
+        <div class="social-links">
+            <span>f</span>
+            <span>○</span>
+            <span>mail@voyagevault.in</span>
         </div>
-        <a href="mailto:mail@voyagevault.in" class="contact-email">mail@voyagevault.in</a>
-    </div>
-    
-    <!-- Logo and Navigation -->
-    <div class="logo-section">
-        <div class="logo">
-            <h1>VoyageVault</h1>
-            <p>Venture out, Get your trip planned</p>
+    </header>
+
+    <nav class="nav">
+        <div>
+            <h1 class="logo">VoyageVault</h1>
+            <p class="tagline">Venture out, Get your trip planned</p>
         </div>
-        
-        <div class="navigation">
-            <a href="home.html" class="active">HOME</a>
-            <a href="about.html">ABOUT US</a>
+        <div class="nav-links">
+            <a href="home.html">HOME</a>
             <a href="#">CONTACT</a>
+            <a href="#">LOG OUT</a>
         </div>
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search your ADVENTURE destination...">
     </div>
-    
-    <!-- Image Carousel -->
-    <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lake view from a boat">
+
+    <main class="main-content">
+        <form class="booking-form">
+            <div class="form-group">
+                <label>No of people :</label>
+                <input type="number" min="1">
             </div>
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Person by a waterfall">
+            
+            <div class="form-group">
+                <label>Start Date:</label>
+                <input type="text" placeholder="DD/MM/YY">
             </div>
-            <div class="carousel-item">
-                <img src="https://www.dailypioneer.com/uploads/2025/story/images/big/the-rise-of-religious-realty--how-india---s-infrastructure-push-is-transforming-spiritual-tourism-2025-02-18.jpg" alt="Colorful buildings in a city">
+
+            <div class="form-group">
+                <label>End Date :</label>
+                <input type="text" placeholder="DD/MM/YY">
             </div>
-            <div class="carousel-item">
-                <img src="https://travelogyindia.b-cdn.net/storage/app/upload/akshardham-temple-tour.jpg" alt="Ancient temple">
-            </div>
-            <div class="carousel-item">
-                <img src="https://www.shutterstock.com/image-photo/roller-coaster-action-amusement-park-600nw-2498769433.jpg" alt="Person kayaking">
-            </div>
+
+            <button type="submit" class="submit-btn">Generate Itinerary →</button>
+        </form>
+
+        <div class="destination-image">
+            <img src="https://www.dellaadventure.com/images/jumbo-passes-v.jpg" alt="Adventure destination">
         </div>
-    </div>
-    
-    <!-- Quote Section -->
-    <div class="quote-section">
-        <p class="quote">The real voyage of discovery consists not in seeking new landscapes, but in having new eyes</p>
-    </div>
+    </main>
 </body>
 </html>
