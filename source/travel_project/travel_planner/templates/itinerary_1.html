@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoyageVault - Itinerary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: #f4ece1;
+        }
+
+        .header {
+            background-color: #d6ccc2;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            background-color: #f4ece1;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .back-arrow {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-size: 2rem;
+            color: #b8a99a;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-arrow:hover {
+            color: #8b7b6a;
+            transform: translateX(-5px);
+        }
+
+        .back-arrow span {
+            font-size: 1.2rem;
+        }
+
+        .itinerary-container {
+            margin: 3rem auto;
+            max-width: 900px;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .itinerary-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .itinerary-header h2 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .itinerary-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .itinerary-summary div {
+            width: 48%;
+        }
+
+        .itinerary-summary h3 {
+            color: #b8a99a;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .itinerary-summary p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .confirm-button {
+            background-color: #b8a99a;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .confirm-button:hover {
+            background-color: #a39485;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .confirm-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .itinerary-summary {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .itinerary-summary div {
+                width: 100%;
+            }
+
+            .back-arrow {
+                bottom: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="social-links">
+            <span>f</span>
+            <span>○</span>
+            <span>mail@voyagevault.in</span>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div>
+            <h1 class="logo">VoyageVault</h1>
+            <p class="tagline">Venture out, find yourself</p>
+        </div>
+        <div class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">CONTACT</a>
+            <a href="#">LOG OUT</a>
+        </div>
+    </nav>
+
+<!-- Header and navigation (same as before) -->
+
+<div class="itinerary-container">
+    <div class="itinerary-header">
+        <h2>Your Itinerary</h2>
+        <p>Review and confirm your booking details</p>
+    </div>
+
+    <div class="itinerary-summary">
+        <div>
+            <h3>Destination</h3>
+            <p>{{ destination }}</p>
+        </div>
+        <div>
+            <h3>Site</h3>
+            <p>{% if site_name %}{{ site_name }}{% else %}Unknown{% endif %}</p>
+        </div>
+    </div>
+
+    <div class="itinerary-summary">
+        <div>
+            <h3>Number of People</h3>
+            <p id="numPeopleSummary">{{ num_people }}</p>
+        </div>
+        <div>
+            <h3>Dates</h3>
+            <p id="datesSummary">{{ start_date }} to {{ end_date }}</p>
+        </div>
+    </div>
+
+    <!-- Display additional details about the site -->
+    <div class="itinerary-summary">
+        <div>
+            <h3>Site Description</h3>
+            <p>{{ description }}</p>
+        </div>
+        <div>
+            <h3>Site History</h3>
+            <p>{{ history }}</p>
+        </div>
+    </div>
+
+    <button class="confirm-button" onclick="confirmBooking()">Confirm Booking</button>
+</div>
+
+
+    <a href="/categories" class="back-arrow">
+        ←<span>Back</span>
+    </a>
+
+    <script>
+        // Get the URL parameters to display the itinerary details
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const destination = urlParams.get('destination') || 'City Name';
+        const site = urlParams.get('site') || 'Site Name';
+        const numPeople = urlParams.get('numPeople') || 1;
+        const startDate = urlParams.get('startDate') || '2025-02-25';
+        const endDate = urlParams.get('endDate') || '2025-02-28';
+
+        // Set the itinerary summary content
+        document.getElementById('destinationSummary').textContent = destination;
+        document.getElementById('siteSummary').textContent = site;
+        document.getElementById('numPeopleSummary').textContent = numPeople;
+        document.getElementById('datesSummary').textContent = `${startDate} to ${endDate}`;
+
+        // Function to confirm booking
+        function confirmBooking() {
+            alert('Booking Confirmed! Thank you for choosing VoyageVault.');
+            window.location.href = "/confirmation";  // Redirect to confirmation page
+        }
+
+        function sendMessage() {
+    let userInput = document.getElementById("user-input").value;
+    let chatBox = document.getElementById("chat-box");
+
+    if (userInput.trim() === "") return;
+
+    // Display user message
+    chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+    // Send request to Django backend
+    fetch("/chat/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userInput }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.response) {
+            chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
+        } else {
+            chatBox.innerHTML += `<p><strong>AI:</strong> Error fetching response</p>`;
+        }
+
+        // Scroll to latest message
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        chatBox.innerHTML += `<p><strong>AI:</strong> An error occurred</p>`;
+    });
+
+    document.getElementById("user-input").value = ""; // Clear input field
+}
+
+    </script>
+</body>
+</html>

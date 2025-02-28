@@ -182,6 +182,14 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+        /* Disabled button style */
+        .submit-btn:disabled {
+            background-color: #d6ccc2;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         .destination-image {
             flex: 1;
             border-radius: 15px;
@@ -237,36 +245,224 @@
     </nav>
 
     <div class="search-bar">
-        <input type="text" class="search-input" placeholder="Search your destination...">
+        <input type="text" id="destination" class="search-input" placeholder="Search your destination..." oninput="searchCities()" autocomplete="off">
+        <div id="search-results" class="search-results-container">
+            <!-- Search results will appear here -->
+        </div>
     </div>
+  
+    <script>
+        // Function to search for cities based on user input
+        function searchCities() {
+            const query = document.querySelector('.search-input').value;
+        
+            // Get the results container element
+            const resultsContainer = document.getElementById('search-results');
+        
+            // If the query is empty, hide the results container and return
+            if (!query) {
+                resultsContainer.innerHTML = '';
+                resultsContainer.style.display = 'none';
+                return;
+            }
+        
+            // Fetch the matching cities from the backend
+            fetch(`/search-cities/?q=${query}`, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                // If there are matching cities, display them
+                if (data.cities.length > 0) {
+                    resultsContainer.style.display = 'block';
+                    resultsContainer.innerHTML = data.cities.map(result => 
+                        `<div class="search-result-item" onclick="selectCity('${result.city}', '${result.site}')">
+                            <strong>City:</strong> ${result.city} <br>
+                            <strong>Site:</strong> ${result.site}
+                        </div>`
+                    ).join('');
+                } else {
+                    // If no cities found, show a message
+                    resultsContainer.style.display = 'block';
+                    resultsContainer.innerHTML = '<p>No cities found</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            
+            // Check if all fields are filled to enable/disable submit button
+            validateForm();
+        }
+        
+        // Function to handle the selection of a city from the dropdown
+        function selectCity(city, site) {
+            const inputField = document.querySelector('.search-input');
+            inputField.value = `${city} (${site})`; // Display city and site in the input field
+        
+            // Hide the search results dropdown after selection
+            document.getElementById('search-results').style.display = 'none';
+            
+            // Check if all fields are filled to enable/disable submit button
+            validateForm();
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchBar = document.querySelector('.search-bar');
+            const resultsContainer = document.getElementById('search-results');
+
+            if (!searchBar.contains(event.target)) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+        
+        // Function to validate the form and enable/disable submit button
+        function validateForm() {
+            const destination = document.getElementById('destination').value;
+            const numPeople = document.getElementById('numPeople').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Check if all fields are filled
+            if (destination && numPeople && startDate && endDate) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+        
+        // Function to handle form submission
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                destination: document.getElementById('destination').value,
+                numPeople: document.getElementById('numPeople').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value
+            };
+            
+            // Convert form data to query parameters
+            const queryParams = new URLSearchParams(formData).toString();
+            
+            // Redirect to itinerary page with form data
+            window.location.href = `/itinerary_1?${queryParams}`;
+        }
+        
+        // Add event listeners to form inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const formInputs = document.querySelectorAll('.booking-form input');
+            formInputs.forEach(input => {
+                input.addEventListener('input', validateForm);
+            });
+            
+            // Add event listener to form submission
+            document.getElementById('bookingForm').addEventListener('submit', submitForm);
+            
+            // Initial validation
+            validateForm();
+        });
+        </script>
+  
+  <!-- CSS for styling the search results dropdown -->
+    <style>
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Adjust this to your desired width */
+            margin: 0 auto;
+            margin-bottom: 0px;
+        }
+    
+        .search-bar {
+            width: 100%;
+        }
+    
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px 4px 0 0;
+            box-sizing: border-box;
+        }
+    
+        .search-results-container {
+            position: absolute;
+            width: 94%;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            display: none; /* Initially hidden */
+            z-index: 10;
+            box-sizing: border-box;
+            margin-top: 0px; /* Removes the gap between input and results */
+        }
+    
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+    
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+    
+        .search-result-item:hover {
+            background-color: #f0f0f0;
+        }
+    
+        .no-results {
+            padding: 10px;
+            color: #666;
+            text-align: center;
+        }
+    
+        /* When input is focused and results are showing */
+        .search-input:focus {
+            border-radius: 4px 4px 0 0;
+            outline: none;
+            border-color: #999;
+        }
+        
+        /* Error message style */
+        .error-message {
+            color: #d9534f;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+    </style>
 
     <main class="main-content">
-        <form action="/itinerary_1" class="booking-form">
+        <form id="bookingForm" class="booking-form">
             <div class="form-group">
-                <label>No of people :</label>
-                <input type="number" min="1">
+                <label for="numPeople">No of people :</label>
+                <input type="number" id="numPeople" min="1" required>
             </div>
             
             <div class="form-group">
-                <label>Start Date:</label>
-                <input type="text" placeholder="DD/MM/YY">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
             </div>
 
             <div class="form-group">
-                <label>End Date :</label>
-                <input type="text" placeholder="DD/MM/YY">
+                <label for="endDate">End Date :</label>
+                <input type="date" id="endDate" required>
             </div>
 
-            <button type="submit" class="submit-btn">Continue to Book →</button>
+            <button type="submit" id="submitBtn" class="submit-btn" disabled>Continue to Book →</button>
         </form>
 
         <div class="destination-image">
             <img src="https://beonthetrail.com/storage/blogs/5/0C1lRwEGGcEnY2R47O2hPOPlZTpmOjKtNGkW8817.jpg" alt="Temple destination">
         </div>
     </main>
-
-    <a href="/categories" class="back-arrow">
-        ←<span>Back</span>
-    </a>
 </body>
 </html>
