@@ -14,6 +14,8 @@ urlpatterns = [
     path('search-cities/', views.search_cities, name='search_cities'),
     path('about',views.about, name='about'),
     path('leisure',views.leisure, name='leisure'),
-    path('adventure', views.adventure, name='adventure')
+    path('adventure', views.adventure, name='adventure'),
+    path('mmm', views.mmm, name='mmm'),
+    path('xxx', views.xxx, name='xxx'),
 ]
 

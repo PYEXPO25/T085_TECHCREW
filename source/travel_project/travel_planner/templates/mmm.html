@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary Schedule</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #c1b293;
+            border-bottom: 2px solid #b2ed04;
+            padding-bottom: 10px;
+        }
+        
+        .day {
+            margin-bottom: 30px;
+        }
+        
+        .day-header {
+            background-color: #ab9a8c;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .day-title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .day-date {
+            font-style: italic;
+        }
+        
+        .activity {
+            border-left: 4px solid #c6b79d;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .activity:last-child {
+            margin-bottom: 0;
+        }
+        
+        .time {
+            font-weight: bold;
+            color: #b6a69a;
+            width: 80px;
+            display: inline-block;
+        }
+        
+        .activity-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .activity-description {
+            color: #555;
+            margin-left: 80px;
+        }
+        
+        .notes {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .print-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #988b6f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .print-btn:hover {
+            background-color: #a7926d;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .print-btn {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .day-header {
+                flex-direction: column;
+            }
+            
+            .time {
+                width: auto;
+                display: block;
+                margin-bottom: 5px;
+            }
+            
+            .activity-description {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Travel Itinerary Schedule</h1>
+        
+        <div class="day">
+            <div class="day-header">
+                <div class="day-title">Day 1</div>
+            </div>
+            
+            <div class="activity">
+                <div class="time">Morning</div>
+
+                <div class="activity-title">1.ISKON</div>
+                <div class="activity-description">        
+                      Experience the feel of Lord Krishna </div>
+                <div class="activity-title">2.Marudhamalai</div>
+                <div class="activity-description">       
+                       Experience the feel of Lord Muruga with a hill viewpoint</div>
+
+            </div>
+            
+            
+            <div class="activity">
+                <div class="time">Evening</div>
+                <div class="activity-title">1.PERUR PATEESHWARAR TEMPLE:</div>
+                <div class="activity-description">It is an ancient Shiva temple renowned for its rich cultural heritage and intricate Dravidian architecture.</div>
+            </div>
+            
+            
+            
+            
+        
+        <div class="day">
+            <div class="day-header">
+                <div class="day-title">Day 2</div>
+            </div>
+            
+            <div class="activity">
+                <div class="time">Morning</div>
+                <div class="activity-title">St Michael's Church:</div>
+                <div class="activity-description">A historic Roman Catholic church known for its colonial architecture and spiritual significance</div>
+            </div>
+            
+            
+            
+            
+               
+            
+           
+            
+            
+            
+            <div class="notes">
+                <strong>Notes:</strong> Bring beach essentials including towel, sunscreen, and swimwear. Dinner reservation confirmed.
+            </div>
+        </div>
+        
+        <button class="print-btn" onclick="window.print()">Print Itinerary</button>
+    </div>
+    
+    <script>
+        // You can add JavaScript to make the itinerary interactive
+        // For example, to add a feature to collapse/expand days
+        document.addEventListener('DOMContentLoaded', function() {
+            const dayHeaders = document.querySelectorAll('.day-header');
+            
+            dayHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const activities = this.nextElementSibling;
+                    const day = this.parentElement;
+                    
+                    // Toggle the visibility of activities
+                    const allActivities = day.querySelectorAll('.activity, .notes');
+                    allActivities.forEach(activity => {
+                        if (activity.style.display === 'none') {
+                            activity.style.display = 'block';
+                        } else {
+                            activity.style.display = 'none';
+                        }
+                    });
+                });
+                
+                // Add a visual cue that the headers are clickable
+                header.style.cursor = 'pointer';
+            });
+        });
+    </script>
+</body>
+</html>

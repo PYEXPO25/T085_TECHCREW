@@ -132,6 +132,13 @@ def leisure(request):
 def adventure(request):
     return render(request, 'adventure.html')
 
+def mmm(request):
+    return render(request, 'mmm.html')
+
+def xxx(request):
+    return render(request, 'xxx.html')
+
+
 # @login_required
 # def generate_itinerary(request):
 #     if request.method == 'POST':
